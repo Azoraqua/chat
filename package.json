@@ -6,11 +6,15 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "deploy:db": "dotenv -e .env.local -- bunx prisma migrate deploy",
+    "deploy:web": "dotenv -e .env.local -- bunx vercel deploy",
+    "deploy": "concurrently \"bun run deploy:db\" \"bun run deploy:web\""
   },
   "dependencies": {
     "@prisma/client": "^5.9.1",
     "@vercel/postgres": "^0.7.2",
+    "concurrently": "^8.2.2",
     "next": "14.1.0",
     "react": "^18",
     "react-dom": "^18",
@@ -21,6 +25,7 @@
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "autoprefixer": "^10.0.1",
+    "dotenv-cli": "^7.3.0",
     "eslint": "^8",
     "eslint-config-next": "14.1.0",
     "postcss": "^8",
